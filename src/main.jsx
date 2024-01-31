@@ -8,7 +8,9 @@ import {
 import LoginPage from './pages/Login.jsx';
 import RegisterPage from './pages/Register.jsx';
 import ErrorPage from './pages/404.jsx';
-import ProductPage from './pages/Products.jsx';
+import ProductsPage from './pages/Products.jsx';
+import ProfilePage from './pages/Profile.jsx';
+import DetailProductPage from './pages/Product.jsx';
 
 const router = createBrowserRouter([
   {
@@ -26,8 +28,16 @@ const router = createBrowserRouter([
   },
   {
     path: "/products",
-    element: <ProductPage />,
-  }
+    element: <ProductsPage />,
+  },
+  {
+    path: "/profile",
+    element: <ProfilePage />,
+  },
+  {
+    path: "/product/:id",
+    element: <DetailProductPage />,
+  },
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

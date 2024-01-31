@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Button from "../Elements/Button";
 export default function CardProduct({children}) {
     return(
@@ -13,21 +14,21 @@ function Header({image}) {
             <img 
                 src={image}
                 alt="" 
-                className="p-8"
+                className="p-8 h-60 w-full object-cover"
             />
         </>
     );
 }
 
-function Body({name, children}) {
+function Body({title, id, children}) {
     return(
         <div className="px-8 h-full">
-            <a href="" >
-                <h5 className="text-2xl font-semibold text-white tracking-tight">{name}</h5>
+            <Link to={`/product/${id}`} >
+                <h5 className="text-2xl font-semibold text-white tracking-tight">{title}</h5>
                 <p className="text-white py-2">
-                    {children}
+                    {children.substring(0, 100)}
                 </p>
-        </a>
+        </Link>
         </div>
     );
 }
