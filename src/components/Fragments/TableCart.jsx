@@ -14,6 +14,8 @@ const TableCart = ({products}) => {
                 const product = products.find((product) => product.id === item.id);
                 return acc + product.price * item.qty;
             }, 0);
+
+            console.log("TABLE CARTS");
     
             // setTotalPrice(sum);
             dispatch({
@@ -23,8 +25,10 @@ const TableCart = ({products}) => {
                 }
             })
             localStorage.setItem("carts", JSON.stringify(carts));
+        } else {
+            console.log("ELSEEEE", products.length);
         }
-    }, [carts])
+    }, [carts, products])
 
     return (
         <table className="text-left table-auto border-separate border-spacing-x-5">

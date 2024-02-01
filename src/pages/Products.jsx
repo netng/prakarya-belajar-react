@@ -14,7 +14,7 @@ function ProductsPage() {
     // const [carts, setCarts] = useState([]);
     // const [totalPrice, setTotalPrice] = useState(0);
     const [products, setProducts] = useState([]);
-    const {isDarkMode} = useContext(DarkMode);
+    const {isDarkMode, setIsDarkMode} = useContext(DarkMode);
     useLogin();
 
     // useEffect(() => {
@@ -33,13 +33,15 @@ function ProductsPage() {
     //     }
     // }, [carts, products])
 
+    console.log(isDarkMode);
+
     useEffect(() => {
         getProducts((data) => {
             setProducts(data);
             // console.log("data", data);
             console.log("is dark mode", isDarkMode);
         });
-    }, [])
+    }, [isDarkMode])
 
     
 
@@ -83,7 +85,7 @@ function ProductsPage() {
                 </div>
                 <div className="w-1/4">
                     <h1 className="text-4xl font-bold text-blue-600 ml-5 mb-2">Cart</h1>
-                    <TableCart products={products} />
+                    <TableCart products={products.length > 0 && products} />
                 </div>
             </div>
         </>

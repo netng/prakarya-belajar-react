@@ -4,23 +4,10 @@ const TotalPriceContext = createContext(null);
 
 const TotalPriceDispatchContext = createContext(null);
 
-export const TotalPriceProvider = ({children}) => {
-    const [totalPrice, dispatch] = useReducer(totalPriceReducer, { total: 0 });
-    console.log("Total Price: ", totalPrice);
-
-    return (
-        <TotalPriceContext.Provider value={totalPrice}>
-            <TotalPriceDispatchContext.Provider value={dispatch}>
-                {children}
-            </TotalPriceDispatchContext.Provider>
-        </TotalPriceContext.Provider>
-    )
-
-}
-
 const totalPriceReducer = (state, action) => {
     switch(action.type) {
         case "UPDATE": {
+            console.log("ACTION: ", action);
             return {
                 total: action.payload.total,
             };
@@ -33,6 +20,21 @@ const totalPriceReducer = (state, action) => {
     }
 
 }
+
+export const TotalPriceProvider = ({children}) => {
+    const [totalPrice, dispatch] = useReducer(totalPriceReducer, {total: 0});
+
+    return (
+        <TotalPriceContext.Provider value={totalPrice}>
+            <TotalPriceDispatchContext.Provider value={dispatch}>
+                {children}
+            </TotalPriceDispatchContext.Provider>
+        </TotalPriceContext.Provider>
+    )
+
+}
+
+
 
 export const useTotalPrice = () => {
     return useContext(TotalPriceContext);

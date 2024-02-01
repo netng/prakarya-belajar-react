@@ -24,6 +24,11 @@ const Navbar = () => {
         logout();
     }
 
+    const handleDarkMode = (isDarkMode) => {
+        setIsDarkMode(isDarkMode)
+        localStorage.setItem("dark-mode", isDarkMode);
+    }
+
     return (
         <div className="flex items-center justify-between bg-blue-400 mb-8 py-2 relative shadow">
             <div className="logo text-white font-bold text-4xl px-4">SalesNeat</div>
@@ -31,7 +36,7 @@ const Navbar = () => {
                 Hello, {username}
                 <Button classname="bg-blue-600 ml-2" onClick={handleLogout}>Logout</Button>
                 <div className="bg-black rounded-lg p-2 ml-4">Total items: {totalCart} | Total price: {total}</div>
-                <button className="bg-blue-500 p-2 rounded text-white ml-2" onClick={() => setIsDarkMode(!isDarkMode)}>{isDarkMode ? "Light" : "Dark" }</button>
+                <button className="bg-blue-500 p-2 rounded text-white ml-2" onClick={() => handleDarkMode(!isDarkMode)}>{isDarkMode ? "Light" : "Dark" }</button>
             </div>
         </div>
     )
