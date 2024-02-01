@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Button from "../components/Elements/Button";
 import CardProduct from "../components/Fragments/CardProduct";
 import { getProducts } from "../services/products.service";
@@ -6,6 +6,7 @@ import { getUsername, logout } from "../services/auth.service";
 import { useLogin } from "../hooks/useLogin";
 import TableCart from "../components/Fragments/TableCart";
 import Navbar from "../components/Layouts/Navbar";
+import { DarkMode } from "../context/DarkMode";
 
 const token = localStorage.getItem("token");
 
@@ -13,6 +14,7 @@ function ProductsPage() {
     // const [carts, setCarts] = useState([]);
     // const [totalPrice, setTotalPrice] = useState(0);
     const [products, setProducts] = useState([]);
+    const {isDarkMode} = useContext(DarkMode);
     useLogin();
 
     // useEffect(() => {
@@ -34,16 +36,14 @@ function ProductsPage() {
     useEffect(() => {
         getProducts((data) => {
             setProducts(data);
-            console.log("data", data);
+            // console.log("data", data);
+            console.log("is dark mode", isDarkMode);
         });
     }, [])
 
     
 
 
-    const handleLogout = () => {
-        logout();
-    }
 
     
     // const handleAddToCart = (id) => {
@@ -64,7 +64,7 @@ function ProductsPage() {
     return (
         <>
             <Navbar />
-            <div className="flex">
+            <div className={`flex ${isDarkMode && "bg-slate-700"}`}>
                 <div className="w-3/4 flex flex-wrap gap-2">
                     {
                         products.length > 0 && products.map((product) => (

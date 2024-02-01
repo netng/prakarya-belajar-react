@@ -1,8 +1,12 @@
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { DarkMode } from "../../context/DarkMode";
 
 export default function AuthLayouts({title, type, children}) {
+    const {isDarkMode, setIsDarkMode} = useContext(DarkMode);
+
     return(
-        <div className='flex min-h-screen justify-center items-center'>
+        <div className={`flex min-h-screen justify-center items-center ${isDarkMode && "bg-slate-700"}`}>
             <div className="w-full max-w-xs">
                 <h1 className="text-blue-600 text-3xl font-bold mb-2">
                     {title}
@@ -15,6 +19,9 @@ export default function AuthLayouts({title, type, children}) {
                 {children}
                 <Navigation type={type} />
                 
+            </div>
+            <div className="absolute top-2 right-2">
+                <button className="bg-blue-500 p-2 rounded text-white" onClick={() => setIsDarkMode(!isDarkMode)}>{isDarkMode ? "Light" : "Dark" }</button>
             </div>
         </div>
     );
